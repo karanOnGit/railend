@@ -1,0 +1,24 @@
+name: Deploy to Railway
+
+on:
+  push:
+    branches:
+      - main # or your deployment branch
+
+jobs:
+  deploy:
+    name: Deploy to Railway
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: npm install -g railway
+
+      - name: Authenticate with Railway
+        run: railway login --token ${{ secrets.RAILWAY_TOKEN }}
+
+      - name: Deploy to Railway
+        run: railway up --service backend
