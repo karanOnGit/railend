@@ -7,11 +7,10 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to Railway
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -19,10 +18,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Railway CLI (new)
+      - name: Install Railway CLI
         run: npm install -g @railway/cli
 
       - name: Deploy to Railway
-        run: railway up --service backend
+        run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
